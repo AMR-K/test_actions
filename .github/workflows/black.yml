@@ -34,4 +34,4 @@ jobs:
       run: |
         echo "files_added=`echo ${{ steps.file_changes.outputs.files_added }} | tr ' ' '\n' | grep .py | tr '\n' ' '`" >> $GITHUB_ENV
         echo "files_modified=`echo ${{ steps.file_changes.outputs.files_modified }} | tr ' ' '\n' | grep .py | tr '\n' ' '`" >> $GITHUB_ENV
-        black --check $files_added $files_modified tests/__init__.py
+        black --check $files_added $files_modified __init__.py
