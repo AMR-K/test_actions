@@ -30,8 +30,14 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install black
-    - name: Run black
+    - name: Filter python files
       run: |
         echo "files_added=`echo ${{ steps.file_changes.outputs.files_added }} | tr ' ' '\n' | grep .py | tr '\n' ' '`" >> $GITHUB_ENV
         echo "files_modified=`echo ${{ steps.file_changes.outputs.files_modified }} | tr ' ' '\n' | grep .py | tr '\n' ' '`" >> $GITHUB_ENV
+        echo "action_state=yellow" >> $GITHUB_ENV
+    - name: Run black
+      run: |
+        echo "$files_modified"
+        echo "$files_added"
+        echo $action_state
         black --check $files_added $files_modified __init__.py
